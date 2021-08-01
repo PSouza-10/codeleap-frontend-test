@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useState } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { loadPosts } from "./actions/posts";
+import { POSTS_LOCALSTORAGE_KEY } from "./constants";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { LoginPage, PostsPage } from "./pages";
 
-function App() {
+const App: React.FC = () => {
+  const { posts } = useAppSelector((store) => store);
+  const dispatch = useAppDispatch();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    dispatch(loadPosts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (posts.length > 0) {
+      localStorage.setItem(POSTS_LOCALSTORAGE_KEY, JSON.stringify(posts));
+    }
+  }, [posts]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/posts">
+            <PostsPage username={username} />
+          </Route>
+          <Route exact path="/">
+            <LoginPage username={username} setUsername={setUsername} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
