@@ -23,6 +23,7 @@
 .modal-wrapper .content {
   transform: scale(0);
   transition: transform 0.3s ease;
+  background-color: var(--bg-box);
 }
 
 .modal-wrapper .overlay {
@@ -33,4 +34,8 @@
   bottom: 0;
   z-index: -1;
   position: absolute;
+}
+.modal-header {
+  background-color: transparent;
+  color: var(--primary);
 }

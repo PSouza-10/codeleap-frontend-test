@@ -4,15 +4,21 @@ import { DeleteIcon, EditIcon } from "../icons";
 import "./style.css";
 type PostCardProps = Post & { allowEdit: boolean; onDelete: (p: Post) => void; onEdit: (p: Post) => void };
 export const PostCard: React.FC<PostCardProps> = (post) => {
-  const { allowEdit, author, content, createdAt, title, updatedAt, onDelete, onEdit } = post;
+  const { allowEdit, author, content, createdAt, title, id, updatedAt, onDelete, onEdit } = post;
+
+  const ariaRootId = `post-${id}-description`;
+
   return (
-    <article className="postCard">
+    <article className="postCard" tabIndex={0} aria-describedby={ariaRootId}>
+      <p id={ariaRootId} className="aria-only">
+        {title} published by {author} on {new Date(createdAt).toLocaleDateString()}. Post content: {content}.
+      </p>
       <header className="header">
-        <h2>{title}</h2>
+        <h2 aria-hidden={true}>{title}</h2>
         {allowEdit && (
           <>
-            <DeleteIcon className="icon" onClick={() => onDelete(post)} />
-            <EditIcon className="icon" onClick={() => onEdit(post)} />
+            <DeleteIcon className="icon" tabIndex={0} onClick={() => onDelete(post)} aria-label={`Delete your post ${title}`} />
+            <EditIcon className="icon" tabIndex={0} onClick={() => onEdit(post)} aria-label={`Edit your post ${title}`} />
           </>
         )}
       </header>
@@ -21,7 +27,8 @@ export const PostCard: React.FC<PostCardProps> = (post) => {
           <h3>@{author}</h3>
           <p>{formatDistance(Date.now(), updatedAt || createdAt)} ago</p>
         </span>
-        <p>{content}</p>
+
+        <p aria-hidden={true}>{content}</p>
       </section>
     </article>
   );

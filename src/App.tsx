@@ -21,7 +21,7 @@ const App: React.FC = () => {
     }
   }, [posts]);
   return (
-    <div className="App">
+    <div className="App" id="app-root">
       <BrowserRouter>
         <Switch>
           <Route exact path="/posts">
