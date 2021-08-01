@@ -21,7 +21,7 @@
   width: 45vw;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1024px) {
   .posts-container {
     margin: 0 2vw;
   }

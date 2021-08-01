@@ -95,6 +95,7 @@ export const Feed: React.FC<{ currentUser: string }> = ({ currentUser }) => {
       </Modal>
       {orderedPosts.map((post) => (
         <PostCard
+          key={post.id}
           allowEdit={post.author === currentUser}
           onDelete={(p) => {
             const res = window.confirm("Are you sure you want to delete this item?");
