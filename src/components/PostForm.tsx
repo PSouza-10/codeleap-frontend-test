@@ -19,8 +19,20 @@ export const PostForm: React.FC<PostFormProps> = ({ state, setState, onSubmit, l
   return (
     <form className="standard-form" onSubmit={onSubmit}>
       {labels && labels.title && <h1>{labels.title}</h1>}
-      <Input label="Title" name="title" onChange={(e) => setState({ title: e.target.value })} value={state.title} />
-      <TextArea label="Content" name="content" onChange={(e) => setState({ content: e.target.value })} value={state.content} />
+      <Input
+        label="Title"
+        name="title"
+        onChange={(e) => setState({ title: e.target.value })}
+        value={state.title}
+        placeholder="Hello world"
+      />
+      <TextArea
+        label="Content"
+        name="content"
+        onChange={(e) => setState({ content: e.target.value })}
+        value={state.content}
+        placeholder="Content here"
+      />
       <Button uppercase disabled={invalidFields}>
         {labels && labels.submitButton ? labels.submitButton : "Create"}
       </Button>

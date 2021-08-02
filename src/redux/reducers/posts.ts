@@ -1,4 +1,4 @@
-import { Reducer } from "react";
+import { Reducer } from "redux";
 import { PostActions } from "../../actions/types";
 import { POSTS_LOCALSTORAGE_KEY } from "../../constants";
 import { Post } from "../../types";
@@ -21,15 +21,14 @@ export const reducer: Reducer<typeof state, PostActions> = (currentState = state
       }
 
     case "UPDATE_POST":
-      const { id, ...postContent } = action.payload;
-      let newPosts = Object.fromEntries(currentState.map((post) => [post.id, post]));
-
-      newPosts[id] = {
-        ...newPosts[id],
-        ...postContent,
+      let newPosts = [...currentState];
+      const idx = newPosts.indexOf(action.payload);
+      newPosts[idx] = {
+        ...newPosts[idx],
+        ...action.payload,
       };
 
-      return Object.values(newPosts);
+      return newPosts;
     default:
       return currentState;
   }

@@ -17,3 +17,7 @@ export type PostActions =
       type: "UPDATE_POST";
       payload: Post;
     };
+export type UsernameActions = {
+  type: "SET_USERNAME";
+  payload: string;
+};

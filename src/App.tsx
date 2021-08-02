@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { loadPosts } from "./actions/posts";
 import { POSTS_LOCALSTORAGE_KEY } from "./constants";
@@ -9,7 +8,6 @@ import { LoginPage, PostsPage } from "./pages";
 const App: React.FC = () => {
   const { posts } = useAppSelector((store) => store);
   const dispatch = useAppDispatch();
-  const [username, setUsername] = useState("");
 
   useEffect(() => {
     dispatch(loadPosts());
@@ -25,10 +23,10 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/posts">
-            <PostsPage username={username} />
+            <PostsPage />
           </Route>
           <Route exact path="/">
-            <LoginPage username={username} setUsername={setUsername} />
+            <LoginPage />
           </Route>
         </Switch>
       </BrowserRouter>

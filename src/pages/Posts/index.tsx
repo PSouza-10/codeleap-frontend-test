@@ -9,7 +9,8 @@ import { PostForm } from "../../components/PostForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Post } from "../../types";
 import "./style.css";
-export const PostsPage: React.FC<{ username: string }> = ({ username }) => {
+export const PostsPage: React.FC = () => {
+  const username = useAppSelector((store) => store.username);
   const [postFormValues, setPostFormValues] = useState({
     title: "",
     content: "",

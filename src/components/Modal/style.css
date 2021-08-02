@@ -24,6 +24,7 @@
   transform: scale(0);
   transition: transform 0.3s ease;
   background-color: var(--bg-box);
+  width: 45vw;
 }
 
 .modal-wrapper .overlay {
@@ -38,4 +39,10 @@
 .modal-header {
   background-color: transparent;
   color: var(--primary);
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-wrapper > .content {
+    width: 90vw;
+  }
 }

@@ -33,6 +33,8 @@
 }
 .postCard > section > p {
   padding: 1rem 0;
+  white-space: pre-line;
+  word-break: break-all;
 }
 .postCard section {
   padding: 2rem;

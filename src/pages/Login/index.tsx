@@ -1,10 +1,16 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { setUser } from "../../actions/username";
 import { Button, Input } from "../../components";
+import { useAppDispatch } from "../../hooks/redux";
 import "./style.css";
-export const LoginPage: React.FC<{ username: string; setUsername: (to: string) => void }> = ({ setUsername, username }) => {
+export const LoginPage: React.FC = () => {
+  const [username, setUsername] = useState("");
   const history = useHistory();
+  const dispatch = useAppDispatch();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    dispatch(setUser(username));
     history.push("/posts");
   }
 
