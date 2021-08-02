@@ -19,7 +19,7 @@ export const PostForm: React.FC<PostFormProps> = ({ state, setState, onSubmit, l
   const invalidFields = !state.content || !state.title;
   const username = useAppSelector((store) => store.username);
 
-  if (username.trim()) {
+  if (username) {
     return (
       <form className="standard-form" onSubmit={onSubmit}>
         {labels && labels.title && <h1>{labels.title}</h1>}

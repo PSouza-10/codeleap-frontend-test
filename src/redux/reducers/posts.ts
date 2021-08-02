@@ -6,6 +6,7 @@ import { Post } from "../../types";
 export const state: Post[] = [];
 
 export const reducer: Reducer<typeof state, PostActions> = (currentState = state, action) => {
+  console.log(action);
   switch (action.type) {
     case "ADD_POST":
       return [...currentState, action.payload];
@@ -22,7 +23,7 @@ export const reducer: Reducer<typeof state, PostActions> = (currentState = state
 
     case "UPDATE_POST":
       let newPosts = [...currentState];
-      const idx = newPosts.indexOf(action.payload);
+      const idx = newPosts.findIndex(({ id }) => id === action.payload.id);
       newPosts[idx] = {
         ...newPosts[idx],
         ...action.payload,

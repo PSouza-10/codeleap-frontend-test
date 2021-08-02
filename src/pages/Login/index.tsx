@@ -10,7 +10,7 @@ export const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(setUser(username));
+    dispatch(setUser(username.trim()));
     history.push("/posts");
   }
 

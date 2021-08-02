@@ -19,7 +19,7 @@ const App: React.FC = () => {
     }
   }, [posts]);
   return (
-    <div className="App" id="app-root">
+    <div className="App">
       <BrowserRouter>
         <Switch>
           <Route exact path="/posts">

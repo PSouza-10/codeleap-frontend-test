@@ -2,9 +2,9 @@ import { formatDistance } from "date-fns";
 import { Post } from "../../types";
 import { DeleteIcon, EditIcon } from "../icons";
 import "./style.css";
-type PostCardProps = Post & { allowEdit: boolean; onDelete: (p: Post) => void; onEdit: (p: Post) => void };
-export const PostCard: React.FC<PostCardProps> = (post) => {
-  const { allowEdit, author, content, createdAt, title, id, updatedAt, onDelete, onEdit } = post;
+type PostCardProps = { post: Post; allowEdit: boolean; onDelete: (p: Post) => void; onEdit: (p: Post) => void };
+export const PostCard: React.FC<PostCardProps> = ({ post, onDelete, onEdit, allowEdit }) => {
+  const { author, content, createdAt, title, id, updatedAt } = post;
 
   const ariaRootId = `post-${id}-description`;
 

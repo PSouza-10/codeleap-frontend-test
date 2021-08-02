@@ -83,8 +83,9 @@ export const Feed: React.FC<{ currentUser: string }> = ({ currentUser }) => {
         {modalState.selectedPost && (
           <PostForm
             state={modalState.selectedPost}
-            onSubmit={() => {
-              dispatch(updatePost(modalState.selectedPost));
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+              e.preventDefault();
+              dispatch(updatePost({ ...modalState.selectedPost, updatedAt: Date.now() }));
               setModalState(initialModalState);
             }}
             setState={(to) => partialSetModal({ selectedPost: { ...modalState.selectedPost, ...to } })}
@@ -106,7 +107,7 @@ export const Feed: React.FC<{ currentUser: string }> = ({ currentUser }) => {
             }
           }}
           onEdit={handleEdit}
-          {...post}
+          post={post}
         />
       ))}
     </>
