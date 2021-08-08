@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { BrowserRouter, Switch, Route, useHistory, useLocation } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import { loadPosts } from "./actions/posts";
-import { POSTS_LOCALSTORAGE_KEY } from "./constants";
-import { useAppDispatch, useAppSelector } from "./hooks/redux";
+
+import { useAppDispatch } from "./hooks/redux";
 import { LoginPage, PostsPage } from "./pages";
 
 const App: React.FC = () => {
-  const { posts } = useAppSelector((store) => store);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -15,11 +14,6 @@ const App: React.FC = () => {
       .catch(() => {});
   }, [dispatch]);
 
-  useEffect(() => {
-    if (posts.length > 0) {
-      localStorage.setItem(POSTS_LOCALSTORAGE_KEY, JSON.stringify(posts));
-    }
-  }, [posts]);
   const history = useHistory();
   const location = useLocation();
 
@@ -27,7 +21,7 @@ const App: React.FC = () => {
     if (location.pathname === "/") {
       history.push("/login");
     }
-  }, [location.pathname]);
+  }, [location.pathname, history]);
   return (
     <div className="App">
       <Switch>
